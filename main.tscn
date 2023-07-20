@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=3 uid="uid://jf2ch0f7kllw"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_cmebv"]
+[ext_resource type="Texture2D" uid="uid://dtbhatskmlf4l" path="res://art/kloppenheim_06_puresky_4k.exr" id="2_56wa1"]
+[ext_resource type="Script" path="res://scripts/Gimbal.gd" id="3_eefr8"]
+[ext_resource type="PackedScene" uid="uid://wgho8xf0o0rg" path="res://scenes/water.tscn" id="4_elt35"]
+[ext_resource type="PackedScene" uid="uid://bpfab5dslfjn1" path="res://scenes/arrow.tscn" id="5_ge0ne"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fn3kh"]
+panorama = ExtResource("2_56wa1")
+
+[sub_resource type="Sky" id="Sky_8rsda"]
+sky_material = SubResource("PanoramaSkyMaterial_fn3kh")
+
+[sub_resource type="Environment" id="Environment_tkcjk"]
+background_mode = 2
+sky = SubResource("Sky_8rsda")
+
+[node name="Main" type="Node3D"]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0271249, 0.00954521, -0.0201018)
+script = ExtResource("1_cmebv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.86191, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tkcjk")
+
+[node name="Gimbal" type="Node3D" parent="."]
+process_mode = 3
+transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 0, 10, 0)
+script = ExtResource("3_eefr8")
+
+[node name="Camera3D" type="Camera3D" parent="Gimbal"]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 5)
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 4.0
+offset_top = 6.0
+offset_right = 129.0
+offset_bottom = 160.0
+
+[node name="WoodButton" type="Button" parent="GUI"]
+layout_mode = 0
+offset_right = 38.0
+offset_bottom = 40.0
+toggle_mode = true
+button_pressed = true
+text = "wood"
+
+[node name="SailButton" type="Button" parent="GUI"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 48.0
+offset_right = 40.0
+offset_bottom = 88.0
+toggle_mode = true
+text = "sail"
+
+[node name="SteelButton" type="Button" parent="GUI"]
+layout_mode = 0
+offset_top = 101.0
+offset_right = 45.0
+offset_bottom = 139.0
+toggle_mode = true
+text = "steel"
+
+[node name="BlockButton" type="Button" parent="GUI"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 2.0
+offset_right = 119.0
+offset_bottom = 43.0
+toggle_mode = true
+button_pressed = true
+text = "block"
+
+[node name="FloorButton" type="Button" parent="GUI"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 50.0
+offset_right = 114.0
+offset_bottom = 89.0
+toggle_mode = true
+text = "floor
+"
+
+[node name="Water" parent="." instance=ExtResource("4_elt35")]
+
+[node name="Arrow" parent="." instance=ExtResource("5_ge0ne")]
+transform = Transform3D(5, 0, 0, 0, -2.18557e-07, -5, 0, 5, -2.18557e-07, 0, 4, 2.5)
+
+[connection signal="pressed" from="GUI/WoodButton" to="." method="_on_wood_button_pressed"]
+[connection signal="pressed" from="GUI/SailButton" to="." method="_on_sai_button_pressed"]
+[connection signal="pressed" from="GUI/SteelButton" to="." method="_on_steel_button_pressed"]
+[connection signal="pressed" from="GUI/BlockButton" to="." method="_on_block_button_pressed"]
+[connection signal="pressed" from="GUI/FloorButton" to="." method="_on_floor_button_pressed"]

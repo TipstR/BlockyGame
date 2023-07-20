@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://014gburrnovb"]
+
+[ext_resource type="Material" uid="uid://j48strsg3qg8" path="res://objects/water_plane.tres" id="1_s387i"]
+[ext_resource type="Script" path="res://objects/water_plane.gd" id="2_tat3p"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_xgb82"]
+material = ExtResource("1_s387i")
+subdivide_width = 200
+subdivide_depth = 200
+orientation = 1
+
+[node name="WaterPlane" type="MeshInstance3D"]
+transform = Transform3D(500, 0, 0, 0, 1, 0, 0, 0, 500, -0.0867078, 0.316738, -0.540619)
+transparency = 1.0
+mesh = SubResource("QuadMesh_xgb82")
+script = ExtResource("2_tat3p")

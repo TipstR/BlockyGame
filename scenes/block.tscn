@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmx4eblerw8pk"]
+
+[ext_resource type="Script" path="res://scripts/block.gd" id="1_fsw52"]
+[ext_resource type="Material" uid="uid://dul6h5r60l3k1" path="res://art/materials/pixel_art_16_16/wood2_pixel_standard_material_3d.tres" id="2_63hkn"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_uqnq4"]
+material = ExtResource("2_63hkn")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_egipj"]
+size = Vector3(1.01, 1.01, 1.01)
+
+[node name="Block" type="Node3D"]
+script = ExtResource("1_fsw52")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_uqnq4")
+
+[node name="ClickBox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClickBox"]
+shape = SubResource("BoxShape3D_egipj")

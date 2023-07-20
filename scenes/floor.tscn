@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2hs8yfxmcvsa"]
+
+[ext_resource type="Script" path="res://scripts/floor.gd" id="1_lwyn8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_uqnq4"]
+size = Vector3(1, 0.33, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_egipj"]
+size = Vector3(1.01, 0.34, 1.01)
+
+[node name="Floor" type="Node3D"]
+script = ExtResource("1_lwyn8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.33, 0)
+mesh = SubResource("BoxMesh_uqnq4")
+
+[node name="ClickBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.33, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClickBox"]
+shape = SubResource("BoxShape3D_egipj")
